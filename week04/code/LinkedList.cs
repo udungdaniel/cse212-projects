@@ -207,7 +207,8 @@ public class LinkedList : IEnumerable<int>
     /// </summary>
     public IEnumerable Reverse()
 {
-    // Start at the tail because we want to move backwards
+    // Start at the tail and move backwards through
+    // the linked list using the Prev references.
     var curr = _tail;
 
     while (curr is not null)
@@ -234,13 +235,14 @@ public class LinkedList : IEnumerable<int>
     }
 
     /// <summary>
-    /// Iterate backward through the Linked List
-    /// </summary>
-    public IEnumerable Reverse()
-    {
-        // TODO Problem 5
-        yield return 0; // replace this line with the correct yield return statement(s)
-    }
+/// This method is required by the IEnumerable interface.
+/// It allows the linked list to work correctly with foreach
+/// loops and other collection operations.
+/// </summary>
+IEnumerator IEnumerable.GetEnumerator()
+{
+    return GetEnumerator();
+}
 
     public override string ToString()
     {
