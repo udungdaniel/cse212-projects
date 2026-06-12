@@ -12,10 +12,18 @@ public class Node
     public void Insert(int value)
     {
         // TODO Start Problem 1
+        // Duplicate values are ignored so that the BST behaves
+        // like a sorted set and only stores unique values.
+
+        if (value == Data)
+        {
+            return;
+        }
 
         if (value < Data)
         {
             // Insert to the left
+            // Smaller values belong in the left subtree.
             if (Left is null)
                 Left = new Node(value);
             else
@@ -24,6 +32,7 @@ public class Node
         else
         {
             // Insert to the right
+            // Larger values belong in the right subtree.
             if (Right is null)
                 Right = new Node(value);
             else
@@ -34,12 +43,27 @@ public class Node
     public bool Contains(int value)
     {
         // TODO Start Problem 2
-        return false;
+        // Search the tree the same way values are inserted.
+        // Each recursive call eliminates half of the remaining tree.
+
+        if (value == Data)
+        return true;
+
+        if (value < Data)
+        return Left != null && Left.Contains(value);
+
+        return Right != null && Right.Contains(value);
     }
 
     public int GetHeight()
     {
         // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+        // The height of this node is one plus the larger
+        // height of its left and right subtrees.
+
+        int leftHeight = Left?.GetHeight() ?? 0;
+        int rightHeight = Right?.GetHeight() ?? 0;
+
+        return 1 + Math.Max(leftHeight, rightHeight); // Replace this line with the correct return statement(s)
     }
 }
